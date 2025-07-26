@@ -1,21 +1,22 @@
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 
 public class AsimplePlaywrightTest {
     private static Playwright playwright;
     private static Page page;
     private static Browser browser;
+    private static BrowserContext context;
 
     @BeforeEach
     void setup() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        context = browser.newContext();
         page = browser.newPage();
         page.navigate("https://practicesoftwaretesting.com");
         playwright.selectors().setTestIdAttribute("data-test");
+
+
     }
 
     @Test
